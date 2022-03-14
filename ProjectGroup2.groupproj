@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{049A51CB-434A-40CB-9863-C4D3594B0EDF}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="rad_dll\rad_dll.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="rad_console\rad_console.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="rad_ui\rad_ui.cbproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="rad_dll">
+        <MSBuild Projects="rad_dll\rad_dll.cbproj"/>
+    </Target>
+    <Target Name="rad_dll:Clean">
+        <MSBuild Projects="rad_dll\rad_dll.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="rad_dll:Make">
+        <MSBuild Projects="rad_dll\rad_dll.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="rad_console">
+        <MSBuild Projects="rad_console\rad_console.cbproj"/>
+    </Target>
+    <Target Name="rad_console:Clean">
+        <MSBuild Projects="rad_console\rad_console.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="rad_console:Make">
+        <MSBuild Projects="rad_console\rad_console.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="rad_ui">
+        <MSBuild Projects="rad_ui\rad_ui.cbproj"/>
+    </Target>
+    <Target Name="rad_ui:Clean">
+        <MSBuild Projects="rad_ui\rad_ui.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="rad_ui:Make">
+        <MSBuild Projects="rad_ui\rad_ui.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="rad_dll;rad_console;rad_ui"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="rad_dll:Clean;rad_console:Clean;rad_ui:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="rad_dll:Make;rad_console:Make;rad_ui:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

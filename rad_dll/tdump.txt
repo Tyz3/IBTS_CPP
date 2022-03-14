@@ -1,0 +1,234 @@
+Turbo Dump  Version 6.6.1.0 Copyright (c) 1988-2021 Embarcadero Technologies, Inc.
+            Display of File .\win32\release\rad_dll.dll
+
+Old Executable Header
+
+DOS File Size                                      26200h  (156160. )
+Load Image Size                                      210h  (   528. )
+Relocation Table entry count                          0000h  (     0. )
+Relocation Table address                              0040h  (    64. )
+Size of header record      (in paragraphs)            0004h  (     4. )
+Minimum Memory Requirement (in paragraphs)            000Fh  (    15. )
+Maximum Memory Requirement (in paragraphs)            FFFFh  ( 65535. )
+File load checksum                                    0000h  (     0. )
+Overlay Number                                        001Ah  (    26. )
+
+ILINK Version 9.06
+
+Initial Stack Segment  (SS:SP)			  0000:00B8
+Program Entry Point    (CS:IP)			  0000:0000
+
+
+Portable Executable (PE) File
+
+Header base: 00000200
+
+CPU type                 80386
+Flags                    230E [ executable backwards 32bit nodebug library ]
+DLL flags                0000 [ ]
+Linker Version           5.0
+Time stamp               622DE259 : Sun Mar 13 17:23:53 2022
+O/S Version              6.0
+User Version             0.0
+Subsystem Version        4.0
+Subsystem                0003 [ Windows character ]
+Object count             00000007
+Symbols offset           00000000
+Symbols count            00000000
+Optional header size     00E0
+Magic #                  10B
+Code size                0001F000
+Init Data size           00013000
+Uninit Data size         00000000
+Entry RVA                0000111C
+Image base               00400000
+Code base                00001000
+Data base                00020000
+Object/File align        00001000/00000200
+Reserved                 00000000
+Image size               00039000
+Header size              00000600
+Checksum                 00000000
+Stack reserve/commit     00000000/00000000
+Heap reserve/commit      00100000/00001000
+Number interesting RVAs  00000010
+Name                   RVA       Size  
+------------------  --------  --------
+Exports             00035000  000000A4
+Imports             00034000  000006F4
+Resources           00036000  00000400
+Exceptions          00000000  00000000
+Security            00000000  00000000
+Fixups              00037000  00001F18
+Debug               00000000  00000000
+Description         00000000  00000000
+Global Ptr          00000000  00000000
+TLS                 00000000  00000000
+Callbacks           00000000  00000000
+Bound Imports       00000000  00000000
+Import Addr Table   00000000  00000000
+Delayed Imports     00000000  00000000
+COM Runtime         00000000  00000000
+reserved            00000000  00000000
+
+Object table:
+#   Name              VirtSize    RVA     PhysSize  Phys off  Flags   
+--  --------          --------  --------  --------  --------  --------
+01  .text             0001F000  00001000  0001E200  00000600  60000020 [CER]
+02  .data             00013000  00020000  00004800  0001E800  C0000040 [IRW]
+03  .tls              00001000  00033000  00000400  00023000  C0000040 [IRW]
+04  .idata            00001000  00034000  00000800  00023400  40000040 [IR]
+05  .edata            00001000  00035000  00000200  00023C00  40000040 [IR]
+06  .rsrc             00001000  00036000  00000400  00023E00  40000040 [IR]
+07  .reloc            00002000  00037000  00002000  00024200  50000040 [IRS]
+
+Key to section flags:
+  C - contains code
+  E - executable
+  I - contains initialized data
+  R - readable
+  S - shareable
+  W - writeable
+
+******************************************************************************
+Section:             Import
+File Offset:         00023400 (144384)
+  ImportLookUpTblRVA:0003403C
+  Time Stamp:        00000000
+  Forwarder Chain:   00000000 (index of first forwarder reference)
+
+Imports from KERNEL32.DLL
+                  CloseHandle
+                  CreateFileA
+                  CreateFileMappingA
+                  DeleteCriticalSection
+                  DeleteFileA
+                  EnterCriticalSection
+                  ExitProcess
+                  FreeEnvironmentStringsW
+                  GetACP
+                  GetCPInfo
+                  GetCurrentProcessId
+                  GetCurrentThreadId
+                  GetEnvironmentStrings
+                  GetEnvironmentStringsW
+                  GetFileAttributesA
+                  GetFileType
+                  GetLastError
+                  GetLocalTime
+                  GetLocaleInfoA
+                  GetModuleFileNameA
+                  GetModuleHandleA
+                  GetOEMCP
+                  GetProcAddress
+                  GetProcessHeap
+                  GetStartupInfoA
+                  GetStdHandle
+                  GetStringTypeA
+                  GetStringTypeW
+                  GetSystemDefaultLangID
+                  GetUserDefaultLCID
+                  GetVersion
+                  GetVersionExA
+                  HeapAlloc
+                  HeapFree
+                  InitializeCriticalSection
+                  IsDBCSLeadByteEx
+                  IsDebuggerPresent
+                  IsValidLocale
+                  LCMapStringA
+                  LeaveCriticalSection
+                  LoadLibraryA
+                  MapViewOfFile
+                  MultiByteToWideChar
+                  OpenFileMappingA
+                  RaiseException
+                  ReadFile
+                  RtlUnwind
+                  SetConsoleCtrlHandler
+                  SetFilePointer
+                  SetHandleCount
+                  SetLastError
+                  SetThreadLocale
+                  Sleep
+                  TlsAlloc
+                  TlsFree
+                  TlsGetValue
+                  TlsSetValue
+                  UnmapViewOfFile
+                  VirtualAlloc
+                  VirtualFree
+                  VirtualQuery
+                  WideCharToMultiByte
+                  WriteFile
+
+Imports from USER32.DLL
+                  EnumThreadWindows
+                  MessageBoxA
+                  wsprintfA
+
+******************************************************************************
+Section:             Exports
+File Offset:         00023C00 (146432)
+  Flags:             00000000
+  Time Stamp:        00000000
+  Major Version:     0000
+  Minor Version:     0000
+
+Exports from rad_dll.dll
+  4 exported name(s), 4 export addresse(s).  Ordinal base is 1.
+  Sorted by Name:
+    RVA      Ord. Hint Name
+    -------- ---- ---- ----
+    00001350    3 0000 GetGroupNumber2
+    00001358    4 0001 GetStudentName2
+    00020110    2 0002 ___CPPdebugHook
+    0001D7DC    1 0003 ___setRaiseListFuncAddr
+
+******************************************************************************
+Section:             Resources
+File Offset:         00023E00 (146944)
+  Flags:             00000000
+  Time Stamp:        546D8AFB : Thu Nov 20 11:32:27 2014
+  Major Version:     0000
+  Minor Version:     0000
+
+Resources:
+Type          Name                   Lang Id
+--------------------------------------------
+[0 named entries, 2 ID entries]
+type: RCData (10)  (next directory @00000020)
+
+              [2 named entries, 0 ID entries]
+              DVCLAL  (next directory @00000058)
+
+                                     [0 named entries, 1 ID entries]
+                                     type: Unknown (0)  (data @000000A0)
+                                         Offset:    00036100
+                                         Size:      00000010
+                                         Code Page: 00000000
+                                         Reserved:  00000000
+
+              PLATFORMTARGETS  (next directory @00000070)
+
+                                     [0 named entries, 1 ID entries]
+                                     type: Unknown (1033)  (data @000000B0)
+                                         Offset:    00036110
+                                         Size:      00000002
+                                         Code Page: 00000000
+                                         Reserved:  00000000
+
+type: Version (16)  (next directory @00000040)
+
+              [0 named entries, 1 ID entries]
+              type: Cursor (1)  (next directory @00000088)
+
+                                     [0 named entries, 1 ID entries]
+                                     type: Unknown (1033)  (data @000000C0)
+                                         Offset:    00036114
+                                         Size:      000001F4
+                                         Code Page: 00000000
+                                         Reserved:  00000000
+
+
+

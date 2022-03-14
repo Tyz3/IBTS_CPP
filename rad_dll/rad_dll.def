@@ -1,0 +1,4 @@
+LIBRARY rad_dll
+EXPORTS
+        GetGroupNumber2
+        GetStudentName2
