@@ -9,14 +9,18 @@ using namespace std;
 int _tmain(int argc, _TCHAR* argv[])
 {
 	setlocale(LC_ALL, "Russian");
+	wchar_t studentName[80];
+	wchar_t studentName2[80];
 
 	cout << "Visual Studio Dll" << endl;
 	cout << GetGroupNumber() << endl;
-	wcout << GetStudentName() << endl << endl;
+	GetStudentName(studentName);
+	wcout << studentName << endl << endl;
 
 	cout << "RAD Studio Dll" << endl;
 	cout << GetGroupNumber2() << endl;
-	wcout << GetStudentName2() << endl;
+	GetStudentName2(studentName2);
+	wcout << studentName2 << endl;
 
     system("pause");
 	return 0;

@@ -7,4 +7,4 @@
 #endif
 
 extern "C" LIBRARY_API int __stdcall GetGroupNumber();
-extern "C" LIBRARY_API wchar_t* __stdcall GetStudentName();
+extern "C" LIBRARY_API void __stdcall GetStudentName(wchar_t* studentName);

@@ -49,12 +49,14 @@ void __fastcall TForm1::rad_sn_btnClick(TObject *Sender)
 	}
 
 	PGetStudentName2 GetStudentName2;
-	GetStudentName2 = (PGetStudentName) GetProcAddress(hDll, "GetStudentName2");
+	GetStudentName2 = (PGetStudentName2) GetProcAddress(hDll, "GetStudentName2");
 
 	if (GetStudentName2 == NULL) {
 		ShowMessage("Function GetStudentName2() not found");
 	} else {
-		Form1->rad_sn_label->Caption = GetStudentName2();
+		wchar_t studentName[80];
+		GetStudentName2(studentName);
+		Form1->rad_sn_label->Caption = studentName;
 	}
 
 	FreeLibrary(hDll);
@@ -93,12 +95,14 @@ void __fastcall TForm1::vs_sn_btnClick(TObject *Sender)
 
 	PGetStudentName GetStudentName;
 
-	GetStudentName = (PGetStudentName) GetProcAddress(hDll, "_GetStudentName@0");
+	GetStudentName = (PGetStudentName) GetProcAddress(hDll, "_GetStudentName@4");
 
 	if (GetStudentName == NULL) {
 		ShowMessage("Function GetStudentName() not found");
 	} else {
-		Form1->vs_sn_label->Caption = GetStudentName();
+		wchar_t studentName[80];
+		GetStudentName(studentName);
+		Form1->vs_sn_label->Caption = studentName;
 	}
 
 	FreeLibrary(hDll);

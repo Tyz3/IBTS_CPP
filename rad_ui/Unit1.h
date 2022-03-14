@@ -39,9 +39,9 @@ extern PACKAGE TForm1 *Form1;
 
 // Visual Studio Dll
 typedef int (__stdcall * PGetGroupNumber) (void);
-typedef wchar_t* (__stdcall * PGetStudentName) (void);
+typedef void (__stdcall * PGetStudentName) (wchar_t *);
 
 // RAD Studio Dll
 typedef int (__stdcall * PGetGroupNumber2) (void);
-typedef wchar_t* (__stdcall * PGetStudentName2) (void);
+typedef void (__stdcall * PGetStudentName2) (wchar_t *);
 
