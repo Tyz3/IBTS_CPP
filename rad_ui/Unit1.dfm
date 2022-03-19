@@ -16,30 +16,54 @@ object Form1: TForm1
   object rad_gn_label: TLabel
     Left = 256
     Top = 35
-    Width = 201
+    Width = 200
     Height = 25
     AutoSize = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
   end
   object rad_sn_label: TLabel
     Left = 256
     Top = 66
-    Width = 201
+    Width = 200
     Height = 25
     AutoSize = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
   end
   object vs_gn_label: TLabel
     Left = 256
     Top = 139
-    Width = 201
+    Width = 200
     Height = 25
     AutoSize = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
   end
   object vs_sn_label: TLabel
     Left = 256
     Top = 170
-    Width = 201
+    Width = 200
     Height = 25
     AutoSize = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
   end
   object rad_head_label: TLabel
     Left = 8
