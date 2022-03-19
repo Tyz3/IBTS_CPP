@@ -9,8 +9,8 @@ using namespace std;
 int _tmain(int argc, _TCHAR* argv[])
 {
 	setlocale(LC_ALL, "Russian");
-	wchar_t studentName[80];
-	wchar_t studentName2[80];
+	wchar_t studentName[128];
+	wchar_t studentName2[128];
 
 	cout << "Visual Studio Dll" << endl;
 	cout << GetGroupNumber() << endl;
