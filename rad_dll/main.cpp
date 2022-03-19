@@ -5,5 +5,5 @@ extern "C" int __stdcall GetGroupNumber2() {
 }
 
 extern "C" void __stdcall GetStudentName2(wchar_t* studentName2) {
-	wcscpy(studentName2, L"Ульянихин Евгений");
+	wcscpy(studentName2, L"Ульянихин Евгений Ильич");
 }
