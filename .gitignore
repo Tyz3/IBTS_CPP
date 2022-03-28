@@ -20,3 +20,8 @@ vs_dll/vs_dll/Release/
 vs_console/Release/
 vs_console/.vs/
 vs_console/vs_console/Release/
+fat32_driver/Win32/
+fat32_driver/*.local
+fat32_driver/__astcache/
+fat32_driver/__history/
+fat32_driver/__recovery/
