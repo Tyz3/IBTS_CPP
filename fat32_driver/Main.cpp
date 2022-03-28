@@ -62,7 +62,7 @@ bool readData(HANDLE fileHandle, char dataBuffer[]) {
 }
 
 void printBootRecordInfo(char dataBuffer[]) {
-	FAT32_BootRecord* p = (FAT32_BootRecord*) dataBuffer;
+	FAT32_BootRecord* p = reinterpret_cast<FAT32_BootRecord*> (dataBuffer);
 
 	wcout << L"Данные успешно прочитаны" << endl << endl;
 	printf("OEM \t\t\t\t\t\t\t %s\n", p->OEM_Name);
