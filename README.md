@@ -7,3 +7,6 @@
 
 Скриншот(ы) для ЛР-2:
 ![image](https://user-images.githubusercontent.com/21179689/159137441-4fb3d778-491f-4170-a8d1-166316931443.png)
+
+**fat32_driver**:
+![image](https://user-images.githubusercontent.com/21179689/160430163-c27a3fc7-1d90-4896-95d0-79d3728752c5.png)
