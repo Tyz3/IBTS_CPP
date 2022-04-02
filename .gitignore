@@ -1,4 +1,5 @@
 *.local
+__recovery/
 rad_console/Win32/
 rad_console/*.local
 rad_console/__astcache/
@@ -25,3 +26,8 @@ fat32_driver/*.local
 fat32_driver/__astcache/
 fat32_driver/__history/
 fat32_driver/__recovery/
+sqlite3_console/Win32/
+sqlite3_console/*.local
+sqlite3_console/__astcache/
+sqlite3_console/__history/
+sqlite3_console/__recovery/
