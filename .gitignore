@@ -31,3 +31,9 @@ sqlite3_console/*.local
 sqlite3_console/__astcache/
 sqlite3_console/__history/
 sqlite3_console/__recovery/
+vt_sqlite_ui/Win32/
+vt_sqlite_ui/*.local
+vt_sqlite_ui/*.stat
+vt_sqlite_ui/__astcache/
+vt_sqlite_ui/__history/
+vt_sqlite_ui/__recovery/
