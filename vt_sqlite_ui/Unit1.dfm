@@ -2,7 +2,7 @@ object Form1: TForm1
   Left = 0
   Top = 0
   ActiveControl = VirtualStringTree1
-  Caption = 'Form1'
+  Caption = 'Chrome History Viewer'
   ClientHeight = 361
   ClientWidth = 566
   Color = clBtnFace
@@ -123,7 +123,7 @@ object Form1: TForm1
     Top = 328
     Width = 129
     Height = 25
-    Caption = #1054#1095#1080#1089#1090#1080#1090#1100' '#1090#1072#1073#1083#1080#1094#1091
+    Caption = #1059#1076#1072#1083#1080#1090#1100' '#1090#1072#1073#1083#1080#1094#1091
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13

@@ -47,6 +47,7 @@ void fillVirtualTree(sqlite3* database) {
 	const char *errmsg;
 	sqlite3_stmt *pStatement;
 
+	// Формируем запрос
 	wchar_t sql[] = L"SELECT id, url, title, visit_count FROM urls;";
 
 	int result = sqlite3_prepare16_v2(database, sql, -1, &pStatement, NULL);
@@ -57,6 +58,7 @@ void fillVirtualTree(sqlite3* database) {
 
 		// Шаг 2 (выполнение запроса и получение результата для множества строк)
 		printDebug(1, u"Загрузка данных");
+
 		int rowsCount = 0;
 		while (true) {
 			result = sqlite3_step(pStatement);
@@ -75,6 +77,7 @@ void fillVirtualTree(sqlite3* database) {
 		}
 
 		Form1->VirtualStringTree1->EndUpdate();
+
 		printDebug(0, u"Данные загружены");
 	} else {
 		errmsg = sqlite3_errmsg(database);
@@ -90,27 +93,47 @@ void fillVirtualTree(sqlite3* database) {
 	sqlite3_finalize(pStatement);
 }
 
-void removeEntryById(sqlite3* database, int id) {
+void removeEntryCascadeById(sqlite3* database, int id) {
 	// Шаг 1 (подготовка запроса)
 	const char *errmsg;
 	sqlite3_stmt *pStatement;
 
+	// Формируем запросы
 	wchar_t sql[100];
-	swprintf(
-		sql, 100,
-		L"DELETE FROM urls WHERE id = %d;",
-		id
-	);
+	wchar_t sql2[100];
+	swprintf(sql, 100, L"DELETE FROM urls WHERE id = %d;", id);
+	swprintf(sql2, 100, L"DELETE FROM visits WHERE url = %d;", id);
 
 	int result = sqlite3_prepare16_v2(database, sql, -1, &pStatement, NULL);
 
 	if (result == SQLITE_OK) {
 		// Шаг 2 (выполнение запроса)
 		result = sqlite3_step(pStatement);
+
+		// Проверяем результат
 		if (result == SQLITE_DONE) {
-			printDebug(0, u"Запись удалена");
+			// Второй запрос для другой таблицы если 1-ый выполнился
+			result = sqlite3_prepare16_v2(database, sql2, -1, &pStatement, NULL);
+
+			if (result == SQLITE_OK) {
+				// Шаг 2 (выполнение запроса)
+				result = sqlite3_step(pStatement);
+
+				// Проверяем результат
+				if (result == SQLITE_DONE) {
+					printDebug(0, u"Запись удалена из таблицы urls, также удалены записи по внешним ключам из visits");
+				} else {
+					printDebug(2, u"Ошибка при выполнении 2-го запроса для таблицы visits: result=" + UnicodeString(result));
+				}
+			} else {
+				errmsg = sqlite3_errmsg(database);
+				printDebug(2,
+					u"Ошибка компиляции SQL-запроса: " + UnicodeString(errmsg)
+					+ "\n" + UnicodeString(sql)
+				);
+			}
 		} else {
-			printDebug(2, u"Ошибка при выполнении запроса: result=" + UnicodeString(result));
+			printDebug(2, u"Ошибка при выполнении 1-го запроса для таблицы urls: result=" + UnicodeString(result));
 		}
 	} else {
 		errmsg = sqlite3_errmsg(database);
@@ -129,6 +152,7 @@ void dropTable(sqlite3* database) {
 	const char *errmsg;
 	sqlite3_stmt *pStatement;
 
+	// Формируем запрос
 	wchar_t sql[] = L"DROP TABLE IF EXISTS urls;";
 
 	int result = sqlite3_prepare16_v2(database, sql, -1, &pStatement, NULL);
@@ -136,6 +160,8 @@ void dropTable(sqlite3* database) {
 	if (result == SQLITE_OK) {
 		// Шаг 2 (выполнение запроса)
 		result = sqlite3_step(pStatement);
+
+		// Проверяем результат
 		if (result == SQLITE_DONE) {
 			printDebug(0, u"Таблица urls удалена");
 		} else {
@@ -159,7 +185,8 @@ void __fastcall TForm1::FillButtonClick(TObject *Sender)
 {
 	// Запрос на выбор файла с БД
 	sendFilePathRequest();
-	
+
+	// Проверяем наличие пути к БД
 	if (dbPath == u"") {
 		printDebug(2, u"Сначала загрузите данные");
 		return;
@@ -188,8 +215,10 @@ void __fastcall TForm1::VirtualStringTree1GetText(TBaseVirtualTree *Sender, PVir
 
 {
 	if (Node == NULL) return;
+	// Накладываем структуру на узел
 	UrlsTableStruct* nodeData = (UrlsTableStruct*) VirtualStringTree1->GetNodeData(Node);
 
+	// Инициализируем отображаемые данные в VT
 	switch (Column) {
 		case 0: {
 			CellText = nodeData->Id;
@@ -207,27 +236,32 @@ void __fastcall TForm1::VirtualStringTree1GetText(TBaseVirtualTree *Sender, PVir
 }
 //---------------------------------------------------------------------------
 
-
 void __fastcall TForm1::VirtualStringTree1AddToSelection(TBaseVirtualTree *Sender,
 		  PVirtualNode Node)
 {
 	if (Node == NULL) return;
 
+	// Накладываем структуру на узел
 	UrlsTableStruct* nodeData = (UrlsTableStruct*) VirtualStringTree1->GetNodeData(Node);
+
+	// Выводим на форму кол-во посещений выделенной url
 	Label2->Caption = nodeData->VisitCount;
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TForm1::RemoveLineButtonClick(TObject *Sender)
 {
+	// Проверяем наличие пути к БД
 	if (dbPath == u"") {
 		printDebug(2, u"Сначала загрузите данные");
 		return;
 	}
-	
+
+	// Получаем выделенный узел
 	PVirtualNode selectedNode = VirtualStringTree1->FocusedNode;
 	if (selectedNode == NULL) return;
 
+	// Накладываем структуру на узел
 	UrlsTableStruct* nodeData = (UrlsTableStruct*) VirtualStringTree1->GetNodeData(selectedNode);
 
 	// 1. Объявляем переменную:
@@ -239,7 +273,9 @@ void __fastcall TForm1::RemoveLineButtonClick(TObject *Sender)
 	// Проверка открытия БД
 	if (openResult == 0) {
 		// Удаляем запись из таблицы
-		removeEntryById(database, nodeData->Id);
+		removeEntryCascadeById(database, nodeData->Id);
+
+		// Обновляем отображение на форме
 		VirtualStringTree1->BeginUpdate();
 		VirtualStringTree1->DeleteNode(selectedNode);
 		VirtualStringTree1->EndUpdate();
@@ -250,12 +286,13 @@ void __fastcall TForm1::RemoveLineButtonClick(TObject *Sender)
 //---------------------------------------------------------------------------
 
 void __fastcall TForm1::DropTableButtonClick(TObject *Sender)
-{            
+{
+	// Проверяем наличие пути к БД
 	if (dbPath == u"") {
 		printDebug(2, u"Сначала загрузите данные");
 		return;
 	}
-	
+
 	// 1. Объявляем переменную:
 	sqlite3* database;
 
@@ -266,6 +303,8 @@ void __fastcall TForm1::DropTableButtonClick(TObject *Sender)
 	if (openResult == 0) {
 		// Удаляем запись из таблицы
 		dropTable(database);
+
+		// Очищаем элемент в форме
 		VirtualStringTree1->Clear();
 	} else {
 		printDebug(2, u"Ошибка при открытии БД: openResult=" + UnicodeString(openResult));
