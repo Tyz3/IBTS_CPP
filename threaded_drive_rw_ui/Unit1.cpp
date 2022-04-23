@@ -4,6 +4,7 @@
 #pragma hdrstop
 
 #include "Unit1.h"
+#include "Unit2.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -13,6 +14,7 @@ __fastcall TForm1::TForm1(TComponent* Owner)
 	: TForm(Owner)
 {
 }
+
 //---------------------------------------------------------------------------
 void printDebug(int colorCode, UnicodeString msg) {
 	TColor colors[] = {
@@ -28,97 +30,21 @@ void printDebug(int colorCode, UnicodeString msg) {
 	Form1->LogsMemo->Lines->Append(msg);
 }
 
-HANDLE createDeviceHandle(wchar_t deviceLiteral) {
-	wchar_t deviceName[18];
-	swprintf(deviceName, L"\\\\.\\%c:", deviceLiteral);
-
-	// Ñîçäà¸ì handle äëÿ äèñêà
-	HANDLE fileHandle = CreateFile(
-		deviceName,
-		GENERIC_READ,
-		FILE_SHARE_READ, //| FILE_SHARE_WRITE,
-		NULL,
-		OPEN_EXISTING,
-		FILE_ATTRIBUTE_NORMAL,
-		NULL
-	);
-	return fileHandle;
-}
-
-bool createFilePointer(HANDLE fileHandle) {
-	LARGE_INTEGER sectorOffset;
-	sectorOffset.QuadPart = 0;
-
-	// Çàäà¸ì ïîçèöèş
-	unsigned long currentPosition = SetFilePointer(
-		fileHandle,
-		sectorOffset.LowPart,
-		&sectorOffset.HighPart,
-		FILE_BEGIN
-	);
-
-	return currentPosition == sectorOffset.LowPart;
-}
-
-bool readData(HANDLE fileHandle, char dataBuffer[], DWORD bytesToRead) {
-	// DWORD bytesToRea Ñêîëüêî áàéòîâ íóæíî ñ÷èòàòü
-	DWORD bytesRead; 			// Ñêîëüêî áàéòîâ óäàëîñü ñ÷èòàòü
-
-	// ×òåíèå äàííûõ
-	bool readResult = ReadFile(
-		fileHandle,
-		dataBuffer,
-		bytesToRead,
-		&bytesRead,
-		NULL
-	);
-
-	return readResult && bytesRead == bytesToRead;
-}
-
 void __fastcall TForm1::StartReadBtnClick(TObject *Sender)
 {
 	// Ç÷èòûâàåì áóêâó äèñêà (òîìà) èç ôîğìû
 	UnicodeString deviceName = ChooseDeviceEdit->Text;
 	wchar_t deviceLiteral = deviceName.w_str()[0];
 
-	// Ñîçäà¸ì handle äëÿ äèñêà
-	HANDLE fileHandle = createDeviceHandle(deviceLiteral);
-
-	// Ïğîâåğÿåì ñîçäàíèå handle
-	if (fileHandle == INVALID_HANDLE_VALUE) {
-		CloseHandle(fileHandle);
-		printDebug(1, u"Îøèáêà ñîçäàíèÿ HANDLE: INVALID_HANDLE_VALUE");
-		return;
-	} else {
-		printDebug(9, u"Ñîçäàí HANDLE äëÿ äèñêà " + UnicodeString(deviceLiteral));
-	}
-
-	// Çàäà¸ì ïîçèöèş ÷òåíèÿ â ôàéëå
-	bool filePointerCreated = createFilePointer(fileHandle);
-
-	// Ïğîâåğÿì ïîçèöèş
-	if (!filePointerCreated) {
-		CloseHandle(fileHandle);
-		printDebug(1, u"Îøèáêà ïîçèöèîíèğîâàíèÿ");
-		return;
-	} else {
-		printDebug(9, u"Ïîçèöèîíèğîâàíèå íàñòğîåíî");
-	}
-
-	// ×èòàåì äàííûå èç ôàéëà
-	char dataBuffer[1024];
-	bool read = readData(fileHandle, dataBuffer, 1024);
-	CloseHandle(fileHandle);
-
-	// Âûâîä äàííûõ â êîíñîëü
-	if (read) {
-		printDebug(9, u"Äàííûå ïğî÷èòàíû â áóôåğ (" + UnicodeString(sizeof(dataBuffer)) + " áàéò) ");
-		// TODO ÷èòàåì äàííûå
-	} else {
-		printDebug(1, u"Îøèáêà ÷òåíèÿ äàííûõ");
-		return;
-	}
-
+	readThread = new ReadThread(false, deviceLiteral);
 }
 //---------------------------------------------------------------------------
+
+void __fastcall TForm1::StopReadBtnClick(TObject *Sender)
+{
+	StopReadBtn->Enabled = false;
+	readThread->Terminate();
+}
+//---------------------------------------------------------------------------
+
+
