@@ -102,12 +102,15 @@ int main(int argc, char* argv[]) {
 
 	// Проверям позицию
 	if (!filePointerCreated) {
+		CloseHandle(fileHandle);
 		wcout << L"Ошибка позиционирования" << endl << endl;
 		return 1;
 	}
 
 	// Читаем данные из файла
 	bool read = readData(fileHandle, dataBuffer);
+	
+	CloseHandle(fileHandle);
 
 	// Вывод данных в консоль
 	if (read) {

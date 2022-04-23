@@ -1,0 +1,61 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 298
+  ClientWidth = 635
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object DebugLabel: TLabel
+    Left = 208
+    Top = 8
+    Width = 419
+    Height = 25
+    AutoSize = False
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Calibri'
+    Font.Style = []
+    ParentFont = False
+  end
+  object StartReadBtn: TButton
+    Left = 8
+    Top = 8
+    Width = 129
+    Height = 25
+    Caption = #1055#1088#1086#1095#1080#1090#1072#1090#1100
+    TabOrder = 0
+    OnClick = StartReadBtnClick
+  end
+  object ChooseDeviceEdit: TEdit
+    Left = 143
+    Top = 8
+    Width = 50
+    Height = 25
+    Alignment = taCenter
+    AutoSize = False
+    TabOrder = 1
+  end
+  object LogsMemo: TMemo
+    Left = 208
+    Top = 48
+    Width = 419
+    Height = 242
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Calibri'
+    Font.Style = []
+    ParentFont = False
+    ReadOnly = True
+    TabOrder = 2
+  end
+end
