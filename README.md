@@ -16,3 +16,8 @@
 
 # threaded_driver_rw_ui (CreateFile + Threads)
 ![image](https://user-images.githubusercontent.com/21179689/164944342-b8e77650-3fb4-4500-8032-9d05900ffffc.png)
+
+# test_collection_time_console (memory allocation speedtest: new int[] vs vector<int>)
+> 1.000.000 операций выделения памяти
+  
+![image](https://user-images.githubusercontent.com/21179689/167468032-f58268bc-5581-4759-b492-28a83c654bf7.png)
