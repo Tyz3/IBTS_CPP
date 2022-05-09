@@ -51,3 +51,10 @@ threaded_drive_rw_ui/*.stat
 threaded_drive_rw_ui/__astcache/
 threaded_drive_rw_ui/__history/
 threaded_drive_rw_ui/__recovery/
+
+test_collection_time_console/Win32/
+test_collection_time_console/*.local
+test_collection_time_console/*.stat
+test_collection_time_console/__astcache/
+test_collection_time_console/__history/
+test_collection_time_console/__recovery/
