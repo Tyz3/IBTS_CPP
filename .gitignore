@@ -58,3 +58,10 @@ test_collection_time_console/*.stat
 test_collection_time_console/__astcache/
 test_collection_time_console/__history/
 test_collection_time_console/__recovery/
+
+final_fs_driver_ui/Win32/
+final_fs_driver_ui/*.local
+final_fs_driver_ui/*.stat
+final_fs_driver_ui/__astcache/
+final_fs_driver_ui/__history/
+final_fs_driver_ui/__recovery/
