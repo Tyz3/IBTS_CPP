@@ -3,12 +3,12 @@ object Form1: TForm1
   Top = 0
   BorderStyle = bsDialog
   Caption = 'File System Signature Finder'
-  ClientHeight = 531
+  ClientHeight = 561
   ClientWidth = 794
   Color = clBtnFace
-  Constraints.MaxHeight = 560
+  Constraints.MaxHeight = 590
   Constraints.MaxWidth = 800
-  Constraints.MinHeight = 560
+  Constraints.MinHeight = 590
   Constraints.MinWidth = 800
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -617,7 +617,7 @@ object Form1: TForm1
   end
   object Label4: TLabel
     Left = 8
-    Top = 172
+    Top = 300
     Width = 136
     Height = 18
     Alignment = taCenter
@@ -645,6 +645,79 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
   end
+  object L_FSKeyWord: TLabel
+    Left = 8
+    Top = 92
+    Width = 136
+    Height = 18
+    Alignment = taCenter
+    AutoSize = False
+    Caption = '-** * - * -*- -'
+    Color = clWhite
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = 14
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+  end
+  object Label6: TLabel
+    Left = 150
+    Top = 497
+    Width = 74
+    Height = 18
+    AutoSize = False
+    Caption = 'db_id'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = 14
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object L_Id: TLabel
+    Left = 224
+    Top = 497
+    Width = 64
+    Height = 18
+    Alignment = taRightJustify
+    AutoSize = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = 14
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label8: TLabel
+    Left = 630
+    Top = 497
+    Width = 75
+    Height = 18
+    AutoSize = False
+    Caption = #1050#1083#1072#1089#1090#1077#1088#1086#1074':'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = 14
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object L_ClusterCount: TLabel
+    Left = 711
+    Top = 497
+    Width = 75
+    Height = 18
+    Alignment = taRightJustify
+    AutoSize = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = 14
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
   object VirtualStringTree: TVirtualStringTree
     Left = 150
     Top = 24
@@ -653,7 +726,10 @@ object Form1: TForm1
     Header.AutoSizeIndex = 0
     Header.Options = [hoColumnResize, hoDrag, hoShowSortGlyphs, hoVisible]
     TabOrder = 0
-    TreeOptions.SelectionOptions = [toSimpleDrawSelection]
+    TreeOptions.PaintOptions = [toShowButtons, toShowDropmark, toShowHorzGridLines, toShowRoot, toShowTreeLines, toShowVertGridLines, toThemeAware, toUseBlendedImages]
+    TreeOptions.SelectionOptions = [toFullRowSelect, toSimpleDrawSelection]
+    OnAddToSelection = VirtualStringTreeAddToSelection
+    OnGetText = VirtualStringTreeGetText
     Touch.InteractiveGestures = [igPan, igPressAndTap]
     Touch.InteractiveGestureOptions = [igoPanSingleFingerHorizontal, igoPanSingleFingerVertical, igoPanInertia, igoPanGutter, igoParentPassthrough]
     Columns = <
@@ -663,7 +739,6 @@ object Form1: TForm1
         Width = 100
       end
       item
-        Alignment = taCenter
         Position = 1
         Text = #1057#1086#1076#1077#1088#1078#1080#1084#1086#1077' '#1082#1083#1072#1089#1090#1077#1088#1072
         Width = 530
@@ -687,49 +762,23 @@ object Form1: TForm1
     ShowHint = True
     TabOrder = 1
   end
-  object RB_NTFS: TRadioButton
-    Left = 8
-    Top = 91
-    Width = 136
-    Height = 17
-    Caption = 'NTFS'
-    Checked = True
-    TabOrder = 2
-    TabStop = True
-  end
-  object RB_FAT32: TRadioButton
-    Left = 8
-    Top = 114
-    Width = 136
-    Height = 17
-    Caption = 'FAT32'
-    TabOrder = 3
-  end
-  object RB_exFAT: TRadioButton
-    Left = 8
-    Top = 137
-    Width = 136
-    Height = 17
-    Caption = 'exFAT'
-    TabOrder = 4
-  end
   object ProgressBar: TProgressBar
     Left = 150
-    Top = 497
+    Top = 529
     Width = 636
     Height = 26
-    TabOrder = 5
+    TabOrder = 2
   end
   object E_SearchSig: TEdit
     Left = 8
-    Top = 192
+    Top = 320
     Width = 136
     Height = 21
-    TabOrder = 6
+    TabOrder = 3
   end
-  object CB_NotEmptyClasters: TCheckBox
+  object CB_NotEmptyClusters: TCheckBox
     Left = 8
-    Top = 219
+    Top = 347
     Width = 136
     Height = 17
     Caption = #1053#1077#1087#1091#1089#1090#1099#1077' '#1082#1083#1072#1089#1090#1077#1088#1099
@@ -741,11 +790,11 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
     State = cbChecked
-    TabOrder = 7
+    TabOrder = 4
   end
   object B_Start: TButton
     Left = 8
-    Top = 250
+    Top = 378
     Width = 136
     Height = 26
     Cancel = True
@@ -756,12 +805,12 @@ object Form1: TForm1
     Font.Name = 'Tahoma'
     Font.Style = [fsBold]
     ParentFont = False
-    TabOrder = 8
+    TabOrder = 5
     OnClick = B_StartClick
   end
   object B_Stop: TButton
     Left = 8
-    Top = 282
+    Top = 410
     Width = 136
     Height = 26
     Cancel = True
@@ -773,11 +822,12 @@ object Form1: TForm1
     Font.Name = 'Tahoma'
     Font.Style = [fsBold]
     ParentFont = False
-    TabOrder = 9
+    TabOrder = 6
+    OnClick = B_StopClick
   end
   object B_DeleteEntry: TButton
     Left = 8
-    Top = 465
+    Top = 497
     Width = 136
     Height = 26
     Cancel = True
@@ -789,11 +839,12 @@ object Form1: TForm1
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    TabOrder = 10
+    TabOrder = 7
+    OnClick = B_DeleteEntryClick
   end
-  object Button1: TButton
+  object B_ClearAll: TButton
     Left = 8
-    Top = 497
+    Top = 529
     Width = 136
     Height = 26
     Cancel = True
@@ -805,6 +856,20 @@ object Form1: TForm1
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    TabOrder = 11
+    TabOrder = 8
+    OnClick = B_ClearAllClick
+  end
+  object M_Info: TMemo
+    Left = 8
+    Top = 116
+    Width = 136
+    Height = 178
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = 14
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 9
   end
 end

@@ -9,7 +9,7 @@
 #include <stdio.h>
 
 HANDLE createDeviceHandle(wchar_t deviceLiteral);
-bool createFilePointer(HANDLE fileHandle);
-bool readData(HANDLE fileHandle, char dataBuffer[]);
+bool createFilePointer(HANDLE fileHandle, unsigned long long skip);
+bool readData(HANDLE fileHandle, char dataBuffer[], DWORD bytesToRead);
 void printBootRecordInfo(char dataBuffer[]);
 

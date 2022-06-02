@@ -14,7 +14,7 @@ HANDLE createDeviceHandle(wchar_t deviceLiteral) {
 	HANDLE fileHandle = CreateFileW(
 		deviceName,
 		GENERIC_READ,
-		FILE_SHARE_READ, // | FILE_SHARE_WRITE,
+		FILE_SHARE_READ | FILE_SHARE_WRITE,
 		NULL,
 		OPEN_EXISTING,
 		FILE_ATTRIBUTE_NORMAL,
@@ -23,23 +23,22 @@ HANDLE createDeviceHandle(wchar_t deviceLiteral) {
 	return fileHandle;
 }
 
-bool createFilePointer(HANDLE fileHandle) {
+bool createFilePointer(HANDLE fileHandle, unsigned long long skip) {
 	LARGE_INTEGER sectorOffset;
-	sectorOffset.QuadPart = 0;
+	sectorOffset.QuadPart = skip;
 
 	// Задаём позицию
-	unsigned long currentPosition = SetFilePointer(
+	DWORD currentPosition = SetFilePointer(
 		fileHandle,
 		sectorOffset.LowPart,
 		&sectorOffset.HighPart,
 		FILE_BEGIN
 	);
 
-	return currentPosition == sectorOffset.LowPart;
+ 	return currentPosition == sectorOffset.LowPart;
 }
 
-bool readData(HANDLE fileHandle, char dataBuffer[]) {
-	DWORD bytesToRead = 512;	// Сколько байтов нужно считать
+bool readData(HANDLE fileHandle, char* dataBuffer, DWORD bytesToRead) {
 	DWORD bytesRead; 	    	// Сколько байтов удалось считать
 
 	// Чтение данных
@@ -51,5 +50,5 @@ bool readData(HANDLE fileHandle, char dataBuffer[]) {
 		NULL
 	);
 
-	return readResult && bytesRead == bytesToRead;
+	return readResult && bytesRead > 0;
 }
